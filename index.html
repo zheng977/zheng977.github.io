@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>zhijie zheng | 郑志杰</title>
+    <meta name="description" content="A minimal text homepage">
+    <style>
+      :root { color-scheme: light dark; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        line-height: 1.7;
+      }
+      main {
+        max-width: 720px;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+      h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+      h2 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
+      p, li { font-size: 1rem; }
+      a { color: inherit; }
+      footer { margin-top: 3rem; font-size: 0.9rem; opacity: 0.7; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Hi, I'm zhijie zheng</h1>
+      <p>Welcome to my personal homepage — a minimal page for bio, links, and contact.</p>
+
+      <h2>About Me</h2>
+      <p>
+        I am a third-year undergraduate in Electronic Information Engineering at the School of Electronic and Information Engineering , Beihang University (BUAA).
+        My research interest is bringing AI into the real world through agent-based interactions.
+      </p>
+
+      <h2>Links</h2>
+      <ul>
+        <li>Email: <a href="mailto:zhengzhijie@buaa.edu.cn">zhengzhijie@buaa.edu.cn</a></li>
+      </ul>
+
+      <footer>
+        <p>© <span id="y"></span> zhijie zheng</p>
+      </footer>
+    </main>
+
+    <script>
+      // Auto year
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+  </html>
