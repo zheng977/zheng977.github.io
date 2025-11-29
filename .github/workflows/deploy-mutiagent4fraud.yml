@@ -62,10 +62,17 @@ jobs:
         env:
            ASTRO_OUT_DIR: dist
 
+      - name: Prepare artifact structure
+        run: |
+          mkdir -p site-output/MutiAgent4Fraud
+          cp -r MutiAgent4Fraud/website/dist/* site-output/MutiAgent4Fraud/
+          # Also copy an index.html to root to redirect or show something, strictly optional but good for debugging
+          echo '<meta http-equiv="refresh" content="0; url=/MutiAgent4Fraud/">' > site-output/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: MutiAgent4Fraud/website/dist
+          path: site-output
 
   deploy:
     environment:
@@ -78,4 +85,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
