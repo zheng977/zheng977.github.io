@@ -19,10 +19,10 @@ authors:
     url: https://thinklab.sjtu.edu.cn/
     notes: ["1"]
   - name: Lizhuang Ma
-    url: https://dmcv.sjtu.edu.cn/
+    url: https://www.cs.sjtu.edu.cn/jiaoshiml/malizhuang.html
     notes: ["1", "†"]
   - name: Jing Shao
-    url: https://shaojing24.github.io/
+    url: https://amandajshao.github.io/
     notes: ["2", "†"]
 notes:
   - symbol: "1"
@@ -52,65 +52,93 @@ import Figure from "../components/Figure.astro";
 import Picture from "../components/Picture.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import Highlight from "../components/Highlight.astro";
+import Carousel from "../components/Carousel.astro";
 import { Icon } from "astro-icon/components";
 
 import structure from "../assets/structure.jpg";
 import datasetExample from "../assets/dataset_example.jpg";
 import categoryPie from "../assets/category_pie.png";
 import categoryBar from "../assets/category_bar.png";
+import motivation from "../assets/Motivation.png";
+import badCollusion1 from "../assets/bad_cllusion1.png";
+import badCollusion2 from "../assets/bad_conllusion2.png";
+
+export const fraudCases = [
+  { src: badCollusion1, alt: "Technical Disguise Collusion", caption: "Case 1: Malicious agents collaborate to disguise malicious code as a benign loader demo." },
+  { src: badCollusion2, alt: "Hype Building Collusion", caption: "Case 2: A group of malicious agents coordinate to boost a scam post's visibility through fake engagement." },
+];
+
+export const datasetImages = [
+  { src: categoryPie, alt: "Distribution of fraud categories", caption: "Distribution of fraud categories in the balanced dataset." },
+  { src: categoryBar, alt: "Number of records per fraud category", caption: "Number of records per fraud category." },
+];
 
 <HighlightedSection>
 
-<h2 class="flex items-center justify-center gap-2">
-  <Icon name="mdi:star-four-points-outline" class="text-yellow-500" /> Highlights
-</h2>
+<h2 class="text-center">Highlights</h2>
 
-- **End-to-end fraud lifecycle**: Public hype → trust building → private persuasion → money transfer, with <Highlight>public feed + P2P DM</Highlight>.
-- **Full-scale fraud-post corpus**: <Highlight>MultiAgentFraudBench</Highlight> covers <Highlight>28 scenarios</Highlight> across 7 categories with diverse personas.
-- **Collusion testbed**: Evaluate cooperative fraud behaviors and <Highlight>mitigations</Highlight> (auditing, warnings, resilience) across LLM families.
+<div class="space-y-3">
+  <div class="flex items-start gap-2">
+    <Icon name="mdi:star-four-points-outline" class="text-yellow-500 mt-1 flex-shrink-0" />
+    <div>**Full-lifecycle fraud modeling**: The first benchmark that models the <Highlight>entire lifecycle</Highlight> of financial fraud, far beyond simple chatbot-style evaluations.</div>
+  </div>
+  <div class="flex items-start gap-2">
+    <Icon name="mdi:star-four-points-outline" class="text-yellow-500 mt-1 flex-shrink-0" />
+    <div>**Scalable collusion-enabled simulation platform**: A <Highlight>scalable platform</Highlight> where malicious agents can evolve, coordinate, and form <Highlight>emergent collusion behaviors</Highlight>.</div>
+  </div>
+  <div class="flex items-start gap-2">
+    <Icon name="mdi:star-four-points-outline" class="text-yellow-500 mt-1 flex-shrink-0" />
+    <div>**First full-spectrum financial fraud dataset**: The first dataset covering <Highlight>all major categories</Highlight> of online financial fraud posts.</div>
+  </div>
+</div>
 
 </HighlightedSection>
 
 ## Motivation
+As LLM agents become autonomous and socially interactive, their cooperation can spontaneously shift from helpful collaboration to harmful collusion—mirroring real multi-stage financial fraud rings and creating urgent risks at population scale.
 
-[TODO: Insert Motivation content here. Explain why studying multi-agent financial fraud is critical, the gap in current research regarding collaborative fraud, and the potential risks posed by autonomous agent societies.]
+<Figure>
+  <Picture slot="figure" src={motivation} alt="Illustration contrasting good collaboration (working together to write code) and bad collaboration (working together to scam money)." />
+  <Fragment slot="caption">
+    **Motivation.** The contrast between beneficial collaboration and harmful collusion in multi-agent systems. As agents become more autonomous and socially interactive, their cooperation can shift from productive teamwork to coordinated fraud.
+  </Fragment>
+</Figure>
 
 ## Abstract
 
-We present **MultiAgent4Fraud**, a comprehensive framework for simulating and analyzing financial fraud risks posed by collaborative Large Language Model (LLM) agents on social platforms. Our project builds upon OASIS to simulate multi-agent financial-fraud scenarios at scale, capturing the complete lifecycle from public hype building to private persuasion and money transfer. We introduce a heterogeneous agent society mixing benign and malicious agents, and provide extensive benchmarks across 28 real-world fraud scenarios. Experiments show that collaborative agents significantly amplify fraud risks, but are also adaptable to interventions like warning labels. We further explore mitigation strategies, including agent-based auditing and fostering group resilience.
+In this work, we study the risks of collective financial fraud in large-scale multi-agent systems powered by large language model (LLM) agents. We investigate whether agents can collaborate in fraudulent behaviors, how such collaboration amplifies risks, and what factors influence fraud success. To support this research, we present MultiAgentFraudBench, a large-scale benchmark for simulating financial fraud scenarios based on realistic online interactions. The benchmark covers 28 typical online fraud scenarios, spanning the full fraud lifecycle across both public and private domains. We further analyze key factors affecting fraud success, including interaction depth, activity level, and fine-grained collaboration failure modes. Finally, we propose a series of mitigation strategies, including adding content-level warnings to fraudulent posts and dialogues, using LLMs as monitors to block potentially malicious agents, and fostering group resilience through information sharing at the societal level. Notably, we observe that malicious agents can adapt to environmental interventions. Our findings highlight the real-world risks of multi-agent financial fraud and suggest practical measures for mitigating them.
 
-## Framework Overview
+## Method
 
-Our framework simulates a realistic social media environment where agents interact through public feeds and private direct messages (DMs).
+Our framework integrates three key components to simulate and analyze multi-agent financial fraud at scale.
 
 <Figure>
-  <Picture slot="figure" src={structure} alt="Framework overview showing the interaction between agents, the recommendation system, and the fraud lifecycle." />
-  <Fragment slot="caption">
-    **Framework Overview.** The system simulates the complete fraud lifecycle: (1) **Public Hype**: Agents post content and interact on the public feed, influenced by a recommendation system. (2) **Private Persuasion**: Malicious agents initiate private conversations with potential victims. (3) **Financial Transfer**: Successful persuasion leads to simulated monetary transfers.
-  </Fragment>
+  <Picture slot="figure" src={structure} alt="Comprehensive diagram showing the lifecycle of financial fraud, the OASIS simulator architecture, self-evolution and collusion mechanisms, and mitigation measures." />
 </Figure>
+
+- **Full-lifecycle Fraud Chain Modeling**. We model the complete lifecycle of financial fraud within a unified simulation environment, consisting of four stages: hook the target, build up trust via <span class="text-blue-600 dark:text-blue-400 font-semibold">collusion</span>, request money through <span class="text-blue-600 dark:text-blue-400 font-semibold">multi-turn dialogues</span>, and victim notification.
+- **Large-scale Social Platform Simulator Based on OASIS**. We extend OASIS with <span class="text-blue-600 dark:text-blue-400 font-semibold">recommendation systems</span> and <span class="text-blue-600 dark:text-blue-400 font-semibold">private messaging channels</span>, enabling hundreds to thousands of agents to continuously interact in a social media-like platform.
+- **Self-evolving Reflection Sharing and Collusion Mechanism**. Malicious agents employ <span class="text-blue-600 dark:text-blue-400 font-semibold">self-evolution</span> to adapt strategies based on feedback and coordinate via <span class="text-blue-600 dark:text-blue-400 font-semibold">group strategies</span> and <span class="text-blue-600 dark:text-blue-400 font-semibold">reflection sharing</span> to execute sophisticated fraud campaigns.
+- **Mitigation Measures**. We propose three-level mitigation strategies: content-level warnings, agent-level trajectory-based banning, and society-level <span class="text-blue-600 dark:text-blue-400 font-semibold">collective resilience</span>.
+
+## Case Study: Malicious Collusion
+
+We showcase two malicious collusion cases generated by our framework, illustrating the sophisticated tactics employed by collaborative agents.
+
+<Carousel images={fraudCases} />
 
 ## MultiAgentFraudBench Dataset
 
 We introduce **MultiAgentFraudBench**, a large-scale benchmark covering **28 typical online fraud scenarios** across **7 major categories**: consumer investment, consumer product and service, employment, prize and grant, phantom debt collection, charity, and relationship & trust.
 
-The dataset is constructed via a three-step pipeline: (1) preparing meta-information for specific fraud scenarios, (2) generating target user profiles to improve reach, and (3) synthesizing posts using **DeepSeek-V3**. This process results in a total of 11.9k posts, with a balanced subset of 2.8k posts (100 per subcategory) to ensure diversity.
-
-<TwoColumns>
-  <Figure slot="left">
-    <Picture slot="figure" src={categoryPie} alt="Pie chart showing the distribution of fraud categories." />
-    <Fragment slot="caption">Distribution of fraud categories in the balanced dataset.</Fragment>
-  </Figure>
-  <Figure slot="right">
-    <Picture slot="figure" src={categoryBar} alt="Bar chart showing the number of records per fraud category." />
-    <Fragment slot="caption">Number of records per fraud category.</Fragment>
-  </Figure>
-</TwoColumns>
-
 <Figure>
-  <Picture slot="figure" src={datasetExample} alt="Diagram illustrating the data generation process." />
+  <Picture slot="figure" src={datasetExample} alt="Dataset Generation Process" />
   <Fragment slot="caption">**Dataset Generation Process.** We use LLM-powered agents to generate diverse fraud scenarios based on a detailed taxonomy and user personas.</Fragment>
 </Figure>
+
+The dataset is constructed via a three-step pipeline: (1) preparing meta-information for specific fraud scenarios, (2) generating target user profiles to improve reach, and (3) synthesizing posts using **DeepSeek-V3**. This process results in a total of 11.9k posts, with a balanced subset of 2.8k posts (100 per subcategory) to ensure diversity.
+
+<Carousel images={datasetImages} />
 
 ## BibTeX Citation
 

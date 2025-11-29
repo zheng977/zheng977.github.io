@@ -6,49 +6,23 @@ interface Props {
 }
 
 const { authors } = Astro.props;
-const topGroup = authors.slice(0, 2);
-const bottomGroup = authors.slice(2);
 ---
 
-<div class="flex flex-col items-center gap-3 text-center">
-  <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-3">
-    {
-      topGroup.map((author) => (
-        <div class="flex flex-col items-center text-center">
-          <div class="flex flex-row text-xl">
-            {author.url ? <a href={author.url}>{author.name}</a> : author.name}
-            {author.notes && (
-              <sup class="text-xl">
-                {author.notes.map(
-                  (note, index, array) =>
-                    note + (index < array.length - 1 ? "," : ""),
-                )}
-              </sup>
+<div class="flex flex-row flex-wrap justify-center items-center gap-x-6 gap-y-2 text-center">
+  {
+    authors.map((author, index) => (
+      <div class="flex flex-row items-center">
+        {author.url ? <a href={author.url} class="text-lg">{author.name}</a> : <span class="text-lg">{author.name}</span>}
+        {author.notes && (
+          <sup class="text-lg ml-0.5">
+            {author.notes.map(
+              (note, noteIndex, array) =>
+                note + (noteIndex < array.length - 1 ? "," : ""),
             )}
-          </div>
-          {author.institution && <div>{author.institution}</div>}
-        </div>
-      ))
-    }
-  </div>
-  <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-3">
-    {
-      bottomGroup.map((author) => (
-        <div class="flex flex-col items-center text-center">
-          <div class="flex flex-row text-xl">
-            {author.url ? <a href={author.url}>{author.name}</a> : author.name}
-            {author.notes && (
-              <sup class="text-xl">
-                {author.notes.map(
-                  (note, index, array) =>
-                    note + (index < array.length - 1 ? "," : ""),
-                )}
-              </sup>
-            )}
-          </div>
-          {author.institution && <div>{author.institution}</div>}
-        </div>
-      ))
-    }
-  </div>
+          </sup>
+        )}
+        {index < authors.length - 1 && <span class="text-lg mx-2">,</span>}
+      </div>
+    ))
+  }
 </div>
