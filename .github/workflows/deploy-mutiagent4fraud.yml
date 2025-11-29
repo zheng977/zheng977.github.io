@@ -50,14 +50,17 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           cache-dependency-path: ${{ github.workspace }}/MutiAgent4Fraud/${{ steps.detect-package-manager.outputs.lockfile }}
 
-      - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-        working-directory: MutiAgent4Fraud
+      - name: Clean and install dependencies
+        run: |
+          cd MutiAgent4Fraud
+          # Remove node_modules and package-lock.json to fix optional dependencies issue
+          rm -rf node_modules package-lock.json
+          # Install dependencies fresh
+          npm install
 
       - name: Build with Astro
         run: |
-          ${{ steps.detect-package-manager.outputs.runner }} astro build \
-            --base "/MutiAgent4Fraud/"
+          npx astro build --base "/MutiAgent4Fraud/"
         working-directory: MutiAgent4Fraud
 
       - name: Prepare artifact structure
