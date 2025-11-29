@@ -1,0 +1,22 @@
+---
+import type { Note } from "../types/types";
+
+interface Props {
+  notes: Note[];
+}
+
+const { notes } = Astro.props;
+---
+
+<div class="text-center text-sm">
+  {
+    notes.map((note, index, array) => (
+      // prettier-ignore
+      <span>
+        {note.symbol === "*" && index > 0 && <br />}
+        <sup>{note.symbol}</sup>{note.text}
+        {index < array.length - 1 && (array[index + 1]?.symbol !== "*") ? ", " : ""}
+      </span>
+    ))
+  }
+</div>

@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "MutiAgent4Fraud/website/**"
+      - "MutiAgent4Fraud/**"
   workflow_dispatch:
 
 permissions:
@@ -26,13 +26,13 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/MutiAgent4Fraud/website/yarn.lock" ]; then
+          if [ -f "${{ github.workspace }}/MutiAgent4Fraud/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
             exit 0
-          elif [ -f "${{ github.workspace }}/MutiAgent4Fraud/website/package.json" ]; then
+          elif [ -f "${{ github.workspace }}/MutiAgent4Fraud/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
@@ -48,24 +48,22 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ github.workspace }}/MutiAgent4Fraud/website/${{ steps.detect-package-manager.outputs.lockfile }}
+          cache-dependency-path: ${{ github.workspace }}/MutiAgent4Fraud/${{ steps.detect-package-manager.outputs.lockfile }}
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-        working-directory: MutiAgent4Fraud/website
+        working-directory: MutiAgent4Fraud
 
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
-            --base "/MutiAgent4Fraud"
-        working-directory: MutiAgent4Fraud/website
-        env:
-           ASTRO_OUT_DIR: dist
+            --base "/MutiAgent4Fraud/"
+        working-directory: MutiAgent4Fraud
 
       - name: Prepare artifact structure
         run: |
           mkdir -p site-output/MutiAgent4Fraud
-          cp -r MutiAgent4Fraud/website/dist/* site-output/MutiAgent4Fraud/
+          cp -r MutiAgent4Fraud/dist/* site-output/MutiAgent4Fraud/
           # Also copy an index.html to root to redirect or show something, strictly optional but good for debugging
           echo '<meta http-equiv="refresh" content="0; url=/MutiAgent4Fraud/">' > site-output/index.html
 

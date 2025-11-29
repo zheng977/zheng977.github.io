@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --leading-relaxed: 1.8; 
+}
+
+@custom-variant dark {
+  &:where([data-theme="dark"] *) {
+    @slot;
+  }
+  &:where([data-theme="device"] *) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
+
+.prose {
+    line-height: 1.8; /* 增加全局行间距 */
+}
+
+.expressive-code {
+  width: 100%;
+}

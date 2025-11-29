@@ -1,0 +1,124 @@
+---
+layout: ../layouts/Layout.astro
+title: "When AI Agents Collude Online: Financial Fraud Risks by Collaborative LLM Agents on Social Platforms"
+description: Official implementation of "When AI Agents Collude Online". The project builds upon OASIS to simulate multi-agent financial-fraud scenarios at scale.
+favicon: favicon.svg
+thumbnail: screenshot-light.png
+theme: device
+authors:
+  - name: Qibing Ren
+    url: https://renqibing.github.io/
+    notes: ["1", "2", "*"]
+  - name: Zhijie Zheng
+    url: https://zheng977.github.io/
+    notes: ["2", "3", "*"]
+  - name: Jiaxuan Guo
+    url: https://scholar.google.com/citations?user=7t8sQukAAAAJ
+    notes: ["2"]
+  - name: Junchi Yan
+    url: https://thinklab.sjtu.edu.cn/
+    notes: ["1"]
+  - name: Lizhuang Ma
+    url: https://dmcv.sjtu.edu.cn/
+    notes: ["1", "†"]
+  - name: Jing Shao
+    url: https://shaojing24.github.io/
+    notes: ["2", "†"]
+notes:
+  - symbol: "1"
+    text: Shanghai Jiao Tong University
+  - symbol: "2"
+    text: Shanghai Artificial Intelligence Laboratory
+  - symbol: "3"
+    text: Beihang University
+  - symbol: "*"
+    text: Equal Contribution
+  - symbol: "†"
+    text: Corresponding Author
+links:
+  - name: Paper
+    url: https://arxiv.org/abs/2511.06448
+    icon: mdi:file-pdf-box
+  - name: Code
+    url: https://github.com/zheng977/MutiAgent4Fraud
+    icon: mdi:github
+  - name: Dataset
+    url: https://huggingface.co/datasets/ninty-seven/MultiAgentFraudBench
+    icon: mdi:database
+---
+
+import HighlightedSection from "../components/HighlightedSection.astro";
+import Figure from "../components/Figure.astro";
+import Picture from "../components/Picture.astro";
+import TwoColumns from "../components/TwoColumns.astro";
+import Highlight from "../components/Highlight.astro";
+import { Icon } from "astro-icon/components";
+
+import structure from "../assets/structure.jpg";
+import datasetExample from "../assets/dataset_example.jpg";
+import categoryPie from "../assets/category_pie.png";
+import categoryBar from "../assets/category_bar.png";
+
+<HighlightedSection>
+
+<h2 class="flex items-center justify-center gap-2">
+  <Icon name="mdi:star-four-points-outline" class="text-yellow-500" /> Highlights
+</h2>
+
+- **End-to-end fraud lifecycle**: Public hype → trust building → private persuasion → money transfer, with <Highlight>public feed + P2P DM</Highlight>.
+- **Full-scale fraud-post corpus**: <Highlight>MultiAgentFraudBench</Highlight> covers <Highlight>28 scenarios</Highlight> across 7 categories with diverse personas.
+- **Collusion testbed**: Evaluate cooperative fraud behaviors and <Highlight>mitigations</Highlight> (auditing, warnings, resilience) across LLM families.
+
+</HighlightedSection>
+
+## Motivation
+
+[TODO: Insert Motivation content here. Explain why studying multi-agent financial fraud is critical, the gap in current research regarding collaborative fraud, and the potential risks posed by autonomous agent societies.]
+
+## Abstract
+
+We present **MultiAgent4Fraud**, a comprehensive framework for simulating and analyzing financial fraud risks posed by collaborative Large Language Model (LLM) agents on social platforms. Our project builds upon OASIS to simulate multi-agent financial-fraud scenarios at scale, capturing the complete lifecycle from public hype building to private persuasion and money transfer. We introduce a heterogeneous agent society mixing benign and malicious agents, and provide extensive benchmarks across 28 real-world fraud scenarios. Experiments show that collaborative agents significantly amplify fraud risks, but are also adaptable to interventions like warning labels. We further explore mitigation strategies, including agent-based auditing and fostering group resilience.
+
+## Framework Overview
+
+Our framework simulates a realistic social media environment where agents interact through public feeds and private direct messages (DMs).
+
+<Figure>
+  <Picture slot="figure" src={structure} alt="Framework overview showing the interaction between agents, the recommendation system, and the fraud lifecycle." />
+  <Fragment slot="caption">
+    **Framework Overview.** The system simulates the complete fraud lifecycle: (1) **Public Hype**: Agents post content and interact on the public feed, influenced by a recommendation system. (2) **Private Persuasion**: Malicious agents initiate private conversations with potential victims. (3) **Financial Transfer**: Successful persuasion leads to simulated monetary transfers.
+  </Fragment>
+</Figure>
+
+## MultiAgentFraudBench Dataset
+
+We introduce **MultiAgentFraudBench**, a large-scale benchmark covering **28 typical online fraud scenarios** across **7 major categories**: consumer investment, consumer product and service, employment, prize and grant, phantom debt collection, charity, and relationship & trust.
+
+The dataset is constructed via a three-step pipeline: (1) preparing meta-information for specific fraud scenarios, (2) generating target user profiles to improve reach, and (3) synthesizing posts using **DeepSeek-V3**. This process results in a total of 11.9k posts, with a balanced subset of 2.8k posts (100 per subcategory) to ensure diversity.
+
+<TwoColumns>
+  <Figure slot="left">
+    <Picture slot="figure" src={categoryPie} alt="Pie chart showing the distribution of fraud categories." />
+    <Fragment slot="caption">Distribution of fraud categories in the balanced dataset.</Fragment>
+  </Figure>
+  <Figure slot="right">
+    <Picture slot="figure" src={categoryBar} alt="Bar chart showing the number of records per fraud category." />
+    <Fragment slot="caption">Number of records per fraud category.</Fragment>
+  </Figure>
+</TwoColumns>
+
+<Figure>
+  <Picture slot="figure" src={datasetExample} alt="Diagram illustrating the data generation process." />
+  <Fragment slot="caption">**Dataset Generation Process.** We use LLM-powered agents to generate diverse fraud scenarios based on a detailed taxonomy and user personas.</Fragment>
+</Figure>
+
+## BibTeX Citation
+
+```bibtex
+@article{ren2025ai,
+  title={When AI Agents Collude Online: Financial Fraud Risks by Collaborative LLM Agents on Social Platforms},
+  author={Ren, Qibing and Zheng, Zhijie and Guo, Jiaxuan and Yan, Junchi and Ma, Lizhuang and Shao, Jing},
+  journal={arXiv preprint arXiv:2511.06448},
+  year={2025}
+}
+```
