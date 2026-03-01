@@ -1,10 +1,8 @@
-name: Deploy MutiAgent4Fraud Website
+name: Deploy Homepage & Project Pages
 
 on:
   push:
     branches: ["main"]
-    paths:
-      - "MutiAgent4Fraud/**"
   workflow_dispatch:
 
 permissions:
@@ -23,57 +21,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/MutiAgent4Fraud/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/MutiAgent4Fraud/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ github.workspace }}/MutiAgent4Fraud/${{ steps.detect-package-manager.outputs.lockfile }}
 
-      - name: Clean and install dependencies
+      - name: Build MutiAgent4Fraud
         run: |
           cd MutiAgent4Fraud
-          # Remove node_modules and package-lock.json to fix optional dependencies issue
           rm -rf node_modules package-lock.json
-          # Install dependencies fresh
           npm install
-
-      - name: Build with Astro
-        run: |
           npx astro build --base "/MutiAgent4Fraud/"
-        working-directory: MutiAgent4Fraud
 
       - name: Prepare artifact structure
         run: |
           mkdir -p site-output/MutiAgent4Fraud
+          # Copy homepage (root files)
+          cp index.html site-output/
+          cp stylesheet.css site-output/
+          cp -r images site-output/
+          # Copy project page
           cp -r MutiAgent4Fraud/dist/* site-output/MutiAgent4Fraud/
-          # Also copy an index.html to root to redirect or show something, strictly optional but good for debugging
-          echo '<meta http-equiv="refresh" content="0; url=/MutiAgent4Fraud/">' > site-output/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: mutiagent-website
           path: site-output
 
   deploy:
@@ -87,5 +59,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: mutiagent-website
