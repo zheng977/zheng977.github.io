@@ -30,7 +30,7 @@
           <p class="venue">Research Preview · 2026</p>
 
           <div class="authors" aria-label="Authors">
-            <a href="https://zheng977.github.io/">Zhijie Zheng<sup>1,2*</sup></a>,
+            <span>Zhijie Zheng<sup>1,2*</sup></span>,
             <span>Yu Li<sup>1,3*</sup></span>,
             <span>Chen Qian<sup>1,4</sup></span>,
             <span>Yuqian Fu<sup>5</sup></span>,
@@ -58,9 +58,9 @@
             <a class="button" href="https://github.com/zheng977/StepGuard">
               <span class="icon">⌘</span> Code
             </a>
-            <a class="button" href="https://zheng977.github.io/">
-              <span class="icon">⌂</span> Homepage
-            </a>
+            <span class="button disabled" aria-disabled="true" title="Coming soon">
+              <span class="icon">🤗</span> Model · Coming Soon
+            </span>
           </nav>
 
           <div class="slogan">
@@ -156,31 +156,20 @@
 
       <section class="section" aria-labelledby="results-title">
         <div class="container">
-          <h2 id="results-title">Experimental Results</h2>
-          <div class="result-grid">
-            <figure>
-              <img
-                src="assets/static-results.png"
-                alt="Safe and unsafe accuracy comparison across guard models."
-              >
-              <figcaption>
-                <strong>Safety behavior.</strong> Guards can fail in opposite
-                directions. StepGuard improves the balance between safe and unsafe
-                decisions over its SFT checkpoint.
-              </figcaption>
-            </figure>
-            <figure>
-              <img
-                src="assets/runtime-results.png"
-                alt="Runtime safety and utility trade-offs on AgentDojo, AgentDyn, and AgentHarm."
-              >
-              <figcaption>
-                <strong>Runtime evaluation.</strong> StepGuard reaches favorable
-                safety–utility operating points on AgentDojo and AgentDyn, while
-                AgentHarm remains more challenging.
-              </figcaption>
-            </figure>
-          </div>
+          <h2 id="results-title">Main Results</h2>
+          <figure class="main-results">
+            <img
+              src="assets/main-results.png"
+              alt="Static safety evaluation comparing StepGuard with closed-source, general, LLM-guard, and agent-guard models."
+            >
+            <figcaption>
+              <strong>Static safety evaluation.</strong> StepGuard-4B obtains the
+              best average step-level accuracy among evaluated models and the best
+              average step-level F1 among open-weight guard models. It also matches
+              GPT-5.4 in average trajectory-level accuracy (83.0), despite using
+              only 4B parameters.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -201,9 +190,8 @@
     <footer>
       <div class="container">
         <p>
-          This website follows the style of the
-          <a href="https://zhoues.github.io/RoboRefer/">RoboRefer project page</a>
-          and the Academic Project Page Template.
+          This website follows the style of the RoboRefer project page and the
+          Academic Project Page Template.
         </p>
       </div>
     </footer>
