@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="StepGuard is a 4B step-level guard for LLM agents, trained with StepGen and Balance-GRPO."
+    >
+    <meta property="og:title" content="StepGuard: Learning Step-Level Guardrails for LLM Agents">
+    <meta
+      property="og:description"
+      content="Pre-execution guarding and trajectory auditing for tool-using LLM agents."
+    >
+    <meta property="og:image" content="https://zheng977.github.io/StepGuard/assets/method.png">
+    <title>StepGuard: Learning Step-Level Guardrails for LLM Agents</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div class="eyebrow">Research Preview</div>
+        <h1><span>StepGuard</span>: Learning Step-Level Guardrails for LLM Agents</h1>
+        <p class="tagline">
+          A lightweight guard that checks candidate tool actions before execution
+          and audits complete agent trajectories.
+        </p>
+
+        <div class="authors" aria-label="Authors">
+          <strong>Zhijie Zheng<sup>*</sup></strong>,
+          <strong>Yu Li<sup>*</sup></strong>,
+          <strong>Chen Qian</strong>,
+          <strong>Yuqian Fu</strong>,
+          <strong>Yanwei Fu</strong>,
+          <strong>Lu Sheng</strong>,
+          <strong>Jing Shao</strong>,
+          <strong>Dongrui Liu<sup>†</sup></strong>
+        </div>
+        <p class="affiliations">
+          Shanghai AI Laboratory · Beihang University · Fudan University ·
+          Renmin University of China · KAUST
+        </p>
+        <p class="author-note"><sup>*</sup>Equal contribution · <sup>†</sup>Corresponding author</p>
+
+        <nav class="links" aria-label="Project links">
+          <span class="button muted" aria-disabled="true">Paper · Coming Soon</span>
+          <a class="button" href="https://github.com/zheng977/StepGuard">Code</a>
+          <a class="button" href="https://zheng977.github.io/">Homepage</a>
+        </nav>
+      </header>
+
+      <section class="highlights" aria-labelledby="highlights-title">
+        <h2 id="highlights-title">Highlights</h2>
+        <div class="highlight-grid">
+          <article>
+            <div class="number">01</div>
+            <h3>Guard before execution</h3>
+            <p>
+              StepGuard judges each candidate action with its current context,
+              allowing unsafe tool calls to be blocked before they affect the environment.
+            </p>
+          </article>
+          <article>
+            <div class="number">02</div>
+            <h3>Step-level data synthesis</h3>
+            <p>
+              StepGen creates prefix-aligned safe and unsafe trajectories with
+              localized risky actions and context-matched safe alternatives.
+            </p>
+          </article>
+          <article>
+            <div class="number">03</div>
+            <h3>Balance-aware RL</h3>
+            <p>
+              Balance-GRPO uses rollout feedback to place more training weight on
+              the action type that the current guard judges less accurately.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="overview-title">
+        <div class="section-heading">
+          <p>Method</p>
+          <h2 id="overview-title">From contrastive trajectories to a calibrated guard</h2>
+        </div>
+        <figure>
+          <img
+            src="assets/method.png"
+            alt="StepGuard training pipeline with StepGen data construction, supervised fine-tuning, and Balance-GRPO calibration."
+          >
+          <figcaption>
+            StepGen provides step-level contrastive supervision for cold-start SFT.
+            Balance-GRPO then calibrates safe and unsafe decisions during on-policy training.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="motivation" aria-labelledby="motivation-title">
+        <div class="section-heading">
+          <p>Motivation</p>
+          <h2 id="motivation-title">Unsafe actions should be stopped before they happen</h2>
+        </div>
+        <div class="split">
+          <div>
+            <p>
+              Tool-using agents can modify files, disclose information, and perform
+              external actions. A guard that examines only the completed trajectory
+              may identify the problem after an irreversible action has already occurred.
+            </p>
+            <p>
+              StepGuard moves the safety decision to the point immediately before
+              execution. It evaluates the current interaction context together with
+              the proposed action, then returns a structured safety judgment.
+            </p>
+          </div>
+          <figure>
+            <img
+              src="assets/motivation.png"
+              alt="An injected trajectory where a harmful email action is detected too late by trajectory-level guarding."
+            >
+          </figure>
+        </div>
+      </section>
+
+      <section class="abstract" aria-labelledby="abstract-title">
+        <div class="section-heading">
+          <p>Overview</p>
+          <h2 id="abstract-title">Abstract</h2>
+        </div>
+        <p>
+          LLM-based agents can interact with external environments through tool
+          invocation, but this capability also introduces risks such as file
+          modification, information leakage, and unauthorized actions. We propose
+          StepGuard, a 4B guard for both pre-action safety checks and trajectory
+          auditing. StepGuard is trained with StepGen, which generates step-annotated
+          safe and unsafe trajectory groups, and Balance-GRPO, which balances learning
+          between safe and unsafe actions using feedback from the current policy.
+          Across static safety benchmarks and guarded-agent environments, StepGuard
+          provides strong safety judgments while preserving useful agent behavior.
+        </p>
+      </section>
+
+      <section class="status" aria-labelledby="status-title">
+        <div>
+          <p class="status-label">Project status</p>
+          <h2 id="status-title">Paper, models, and data are being prepared for release.</h2>
+        </div>
+        <a class="button" href="https://github.com/zheng977/StepGuard">Follow on GitHub</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>StepGuard · 2026</p>
+      <a href="https://zheng977.github.io/">Zhijie Zheng</a>
+    </footer>
+  </body>
+</html>
