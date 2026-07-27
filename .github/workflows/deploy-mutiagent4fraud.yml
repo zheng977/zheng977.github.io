@@ -29,10 +29,8 @@ jobs:
       - name: Build MutiAgent4Fraud
         run: |
           cd MutiAgent4Fraud
-          npm ci
-          npm install --no-save --legacy-peer-deps \
-            @rollup/rollup-linux-x64-gnu@4.52.4 \
-            lightningcss-linux-x64-gnu@1.30.1
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
           npx astro build --base "/MutiAgent4Fraud/"
 
       - name: Prepare artifact structure
