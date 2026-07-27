@@ -42,15 +42,11 @@ h1 {
   line-height: 1.12;
 }
 
-h1 strong {
-  font-weight: 700;
-}
-
 .venue {
   margin: 0 0 14px;
   color: var(--link);
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .authors {
