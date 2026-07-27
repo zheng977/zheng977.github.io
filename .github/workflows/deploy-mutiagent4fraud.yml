@@ -29,8 +29,7 @@ jobs:
       - name: Build MutiAgent4Fraud
         run: |
           cd MutiAgent4Fraud
-          rm -rf node_modules package-lock.json
-          npm install
+          npm ci
           npx astro build --base "/MutiAgent4Fraud/"
 
       - name: Prepare artifact structure
