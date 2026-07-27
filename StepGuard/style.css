@@ -42,15 +42,8 @@ h1 {
   line-height: 1.12;
 }
 
-.venue {
-  margin: 0 0 14px;
-  color: var(--link);
-  font-size: 1.35rem;
-  font-weight: 400;
-}
-
 .authors {
-  margin: 0 auto 8px;
+  margin: 14px auto 8px;
   font-size: 1.18rem;
   line-height: 1.75;
 }
@@ -253,10 +246,6 @@ footer a:hover {
 
   h1 {
     font-size: 2rem;
-  }
-
-  .venue {
-    font-size: 1.08rem;
   }
 
   .authors {
