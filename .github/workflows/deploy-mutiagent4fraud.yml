@@ -30,6 +30,7 @@ jobs:
         run: |
           cd MutiAgent4Fraud
           npm ci
+          npm install --no-save --legacy-peer-deps @rollup/rollup-linux-x64-gnu@4.52.4
           npx astro build --base "/MutiAgent4Fraud/"
 
       - name: Prepare artifact structure
