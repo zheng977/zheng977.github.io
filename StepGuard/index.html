@@ -57,9 +57,12 @@
             <a class="button" href="https://github.com/zheng977/StepGuard">
               <span class="icon">⌘</span> Code
             </a>
-            <span class="button disabled" aria-disabled="true" title="Coming soon">
-              <span class="icon">🤗</span> Model · Coming Soon
-            </span>
+            <a
+              class="button"
+              href="https://huggingface.co/ninty-seven/stepguard-rl-4b"
+            >
+              <span class="icon">🤗</span> StepGuard-RL-4B
+            </a>
           </nav>
 
           <div class="slogan">
@@ -148,6 +151,25 @@
               StepGen constructs prefix-aligned step-level supervision for cold-start
               SFT. Balance-GRPO then uses rollout-batch feedback to balance learning
               between safe and unsafe actions.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="results-title">
+        <div class="container">
+          <h2 id="results-title">Main Results</h2>
+          <figure class="main-results">
+            <img
+              src="assets/main-results.png"
+              alt="Static safety evaluation comparing StepGuard with closed-source, general, LLM-guard, and agent-guard models."
+            >
+            <figcaption>
+              <strong>Static safety evaluation.</strong> StepGuard-4B obtains the
+              best average step-level accuracy among evaluated models and the best
+              average step-level F1 among open-weight guard models. It also matches
+              GPT-5.4 in average trajectory-level accuracy (83.0), despite using
+              only 4B parameters.
             </figcaption>
           </figure>
         </div>
@@ -415,25 +437,6 @@
               Next →
             </button>
           </div>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="results-title">
-        <div class="container">
-          <h2 id="results-title">Main Results</h2>
-          <figure class="main-results">
-            <img
-              src="assets/main-results.png"
-              alt="Static safety evaluation comparing StepGuard with closed-source, general, LLM-guard, and agent-guard models."
-            >
-            <figcaption>
-              <strong>Static safety evaluation.</strong> StepGuard-4B obtains the
-              best average step-level accuracy among evaluated models and the best
-              average step-level F1 among open-weight guard models. It also matches
-              GPT-5.4 in average trajectory-level accuracy (83.0), despite using
-              only 4B parameters.
-            </figcaption>
-          </figure>
         </div>
       </section>
 
