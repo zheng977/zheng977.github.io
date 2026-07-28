@@ -192,6 +192,332 @@ figcaption {
   width: 100%;
 }
 
+.case-intro {
+  max-width: 760px;
+  margin: -8px auto 20px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.case-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin-bottom: 24px;
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.legend-item::before {
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  content: "";
+}
+
+.legend-request::before {
+  background: #4c9b54;
+}
+
+.legend-risk::before {
+  background: #d65a5a;
+}
+
+.legend-action::before {
+  background: #e69536;
+}
+
+.legend-guard::before {
+  background: #3f7fc4;
+}
+
+.case-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.case-tab,
+.case-arrow {
+  border: 1px solid #d5d9df;
+  color: #3f4650;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.case-tab {
+  min-height: 48px;
+  padding: 9px 12px;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.case-tab:hover {
+  border-color: #9aabbc;
+  background: #f7f9fb;
+}
+
+.case-tab.is-active {
+  border-color: #3f7fc4;
+  color: #245f9d;
+  background: #edf5ff;
+}
+
+.case-tab:focus-visible,
+.case-arrow:focus-visible {
+  outline: 3px solid rgb(32 156 238 / 28%);
+  outline-offset: 2px;
+}
+
+.case-stage {
+  min-height: 610px;
+  padding: clamp(18px, 3.5vw, 32px);
+  border: 1px solid #dfe3e8;
+  border-radius: 0 0 12px 12px;
+  background: #fcfcfd;
+}
+
+.case-panel[hidden] {
+  display: none;
+}
+
+.case-panel-enter {
+  animation: case-enter 320ms ease both;
+}
+
+@keyframes case-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.case-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.case-kicker {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.case-header h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+  line-height: 1.3;
+}
+
+.case-outcome {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 150px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.outcome-correct {
+  color: #267238;
+  background: #edf8ef;
+}
+
+.outcome-failure {
+  color: #a33b3b;
+  background: #fff0f0;
+}
+
+.case-flow {
+  max-width: 790px;
+  margin: 0 auto;
+}
+
+.case-step {
+  position: relative;
+  padding: 14px 17px;
+  border: 1px solid #dde1e6;
+  border-left-width: 5px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.case-step p {
+  margin: 4px 0 0;
+}
+
+.step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.request-step {
+  border-left-color: #4c9b54;
+  background: #f5fbf5;
+}
+
+.request-step .step-label {
+  color: #31763a;
+}
+
+.risk-step {
+  border-left-color: #d65a5a;
+  background: #fff6f6;
+}
+
+.risk-step .step-label {
+  color: #a83e3e;
+}
+
+.action-step {
+  border-left-color: #e69536;
+  background: #fff9f1;
+}
+
+.action-step .step-label {
+  color: #a86214;
+}
+
+.neutral-step {
+  border-left-color: #8b97a5;
+  background: #f8f9fb;
+}
+
+.neutral-step .step-label {
+  color: #5c6672;
+}
+
+.flow-arrow {
+  height: 26px;
+  color: #8f969e;
+  font-size: 1.1rem;
+  line-height: 26px;
+  text-align: center;
+}
+
+code {
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  color: #343b43;
+  background: #eceff2;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+
+.guard-diagnosis {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 18px;
+  margin-top: 26px;
+  padding: 18px;
+  border: 1px solid #b9d4ef;
+  border-radius: 9px;
+  background: #f0f7ff;
+}
+
+.diagnosis-failure {
+  border-color: #e2c5c5;
+  background: #fff7f7;
+}
+
+.guard-mark {
+  align-self: start;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: #3f7fc4;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.diagnosis-failure .guard-mark {
+  background: #bc5656;
+}
+
+.guard-diagnosis p {
+  margin: 0;
+}
+
+.diagnosis-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.diagnosis-tags span {
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: #275f99;
+  background: #dbeeff;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.diagnosis-failure .diagnosis-tags span {
+  color: #8e3838;
+  background: #f9dede;
+}
+
+.failure-note {
+  margin: 17px 0 0;
+  padding-left: 13px;
+  border-left: 3px solid #bc5656;
+  color: #6a4040;
+  font-size: 0.88rem;
+}
+
+.case-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.case-arrow {
+  min-width: 112px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+
+.case-arrow:hover {
+  border-color: #8ea1b4;
+  color: #245f9d;
+  background: #f3f7fb;
+}
+
 .release {
   text-align: center;
 }
@@ -230,6 +556,19 @@ footer a:hover {
     display: none;
   }
 
+  .case-stage {
+    min-height: 660px;
+  }
+
+  .case-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .case-outcome {
+    min-width: 0;
+  }
+
   .justified {
     text-align: left;
   }
@@ -258,5 +597,46 @@ footer a:hover {
 
   .section {
     padding: 31px 0;
+  }
+
+  .case-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .case-tab {
+    min-height: 42px;
+    border-radius: 7px;
+  }
+
+  .case-stage {
+    min-height: 0;
+    padding: 15px;
+    border-radius: 9px;
+  }
+
+  .guard-diagnosis {
+    grid-template-columns: 1fr;
+  }
+
+  .guard-mark {
+    justify-self: start;
+  }
+
+  .case-controls {
+    align-items: stretch;
+  }
+
+  .case-arrow {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .case-panel-enter {
+    animation: none;
   }
 }
