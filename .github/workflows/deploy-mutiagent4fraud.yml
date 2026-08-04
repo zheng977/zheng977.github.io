@@ -36,14 +36,14 @@ jobs:
       - name: Prepare artifact structure
         run: |
           mkdir -p site-output/MutiAgent4Fraud
-          mkdir -p site-output/StepGuard
+          mkdir -p site-output/AgentDoG-Step
           # Copy homepage (root files)
           cp index.html site-output/
           cp stylesheet.css site-output/
           cp -r images site-output/
           # Copy project pages
           cp -r MutiAgent4Fraud/dist/* site-output/MutiAgent4Fraud/
-          cp -r StepGuard/* site-output/StepGuard/
+          cp -r AgentDoG-Step/* site-output/AgentDoG-Step/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
